@@ -1,12 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { BottomNavigation, Text } from 'react-native-paper';
+
+// SCREENS
+import GifScreen from './src/screens/gifScreens';
+import ImageScreen from './src/screens/imageScreen';
+
+
+
 
 export default function App() {
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'images'},
+    {key: 'gif'}
+  ])
+
+  const renderScene = BottomNavigation.SceneMap({
+    images: ImageScreen,
+    gif: GifScreen
+  })
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <BottomNavigation
+      navigationState={{index, routes}}
+      onIndexChange = {setIndex}  
+      renderScene = {renderScene}
+        />
   );
 }
 

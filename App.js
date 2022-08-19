@@ -14,9 +14,9 @@ export default function App() {
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    {key: 'images', title: 'Images', focusedIcon: 'image', unfocusedIcon: 'image-outline', color: 'red'},
-    {key: 'gif', title: 'Gifs',   focusedIcon: 'file-video', unfocusedIcon: 'file-video-outline', color: 'blue'},
-    {key: 'text', title: 'Texts', focusedIcon: 'tooltip-text',  unfocusedIcon: 'tooltip-text-outline', color: 'deeppink'}
+    {key: 'images', title: 'Images', focusedIcon: 'image', unfocusedIcon: 'image-outline'},
+    {key: 'gif', title: 'Gifs',   focusedIcon: 'file-video', unfocusedIcon: 'file-video-outline'},
+    {key: 'text', title: 'Texts', focusedIcon: 'tooltip-text',  unfocusedIcon: 'tooltip-text-outline'}
   ])
 
   const renderScene = BottomNavigation.SceneMap({
@@ -32,8 +32,11 @@ export default function App() {
       renderScene = {renderScene}
       shifting = {true}
       sceneAnimationEnabled = {true}
-      sceneAnimationType = {'shifting'}
-      barStyle = {{backgroundColor: routes[index].color, height: '10%'}}
+      sceneAnimationType = {'opacity'}
+      barStyle = {{height: '10%'}}
+      
+
+
       
         />
   );

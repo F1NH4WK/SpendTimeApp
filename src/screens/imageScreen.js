@@ -32,14 +32,12 @@ export default function ImageScreen(){
 
     ])
 
-    const [visibile, setVisible] = useState(false)
-
     const renderImage = (image, index) => 
             <Card style = {{flex: 0.5, margin: 5}}>
                 <Card.Cover source={{uri: image}}/>
-                
             </Card>
-            
+
+
     
 
     return(
@@ -66,6 +64,7 @@ const styles = StyleSheet.create({
     viewContainer: {
         flex: 1,
         paddingHorizontal: 20,
+        paddingTop: 25,
         
     }
 })

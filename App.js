@@ -1,10 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
 import { useState } from 'react';
-import { BottomNavigation } from 'react-native-paper';
+import { BottomNavigation} from 'react-native-paper';
 
 // SCREENS
-import GifScreen from './src/screens/gifScreens';
 import ImageScreen from './src/screens/imageScreen';
 import TextScreen from './src/screens/textScreen';
 
@@ -31,7 +28,7 @@ export default function App() {
       shifting = {true}
       sceneAnimationEnabled = {true}
       sceneAnimationType = {'opacity'}
-      barStyle = {{height: '10%'}}      
+      barStyle = {{height: '10%', backgroundColor: 'rgba(52, 52, 52, 0.2)'}}      
         />
   );
 }

@@ -37,12 +37,8 @@ export default function ImageScreen(){
                 <Card.Cover source={{uri: image}}/>
             </Card>
 
-
-    
-
     return(
         <View style = {styles.viewContainer}>
-            
             <FlatList
             columnWrapperStyle = {{}}
             numColumns = {2}
@@ -54,7 +50,8 @@ export default function ImageScreen(){
                 {
                     uri: `https://picsum.photos/700?random=${Math.random() * 500}`
                 }
-            ])}/>
+            ])}
+            />
 
         </View>
     )
@@ -65,6 +62,5 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 20,
         paddingTop: 25,
-        
     }
 })

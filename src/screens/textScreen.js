@@ -16,8 +16,6 @@ export default function TextScreen(){
     ])
 
 
-
-    const [generate, setGenerate] = useState(true);
     const [loading, setLoading] = useState(false)
 
     useEffect( () => {
@@ -44,14 +42,13 @@ export default function TextScreen(){
             rightStyle = {{paddingHorizontal: 10}} />
                 
             <Card.Content >
-                <Text>{`Altura: ${val.height}\n`}</Text>
+                <Text>{`Altura:  ${val.height}cm\n`}</Text>
                 <View style = {{flexDirection: 'row'}}>
                     <Text>Cor da pele: </Text>
                     <View style = {{width: 20, height: 20, backgroundColor: val.corPele, borderRadius: 15}}/>
                 </View>
              </Card.Content> 
         </Card>
-
 
     return(
         <View style = {styles.viewContainer}>

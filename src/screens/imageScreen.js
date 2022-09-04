@@ -10,22 +10,16 @@ export default function ImageScreen(){
     const [images, setImages] = useState([
 
         {   id: '0',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 500)}/500/700`
         },
         {   id: '1',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 500)}/500/700`,
         },
         {   id: '2',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 500)}/500/700`
         },
         {   id: '3',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 500)}/500/700`,
         },
         {   id: '4',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 500)}/500/700`
         },
         {   id: '5',
-            uri: `https://picsum.photos/id/${Math.round(Math.random() * 400)}/500/700`,
         },
 
     ])
@@ -51,17 +45,19 @@ export default function ImageScreen(){
     }
 
     function ImageView({navigation, route}){
+
+        route.imageId = Math.round(Math.random() * 500)
+        
         return(
             <View style = {{flex: 0.5, margin: 10}}>
                 <SharedElement id={route.id}>
                     <Card onPress={() => navigation.push('ImagesDetails', route)}>
-                        <Card.Cover source={{uri: route.uri}}/>
+                        <Card.Cover 
+                        source={{uri: `https://picsum.photos/id/${route.imageId}/500/700`}}/>
                     </Card>
                 </SharedElement>
-                <Text>{route.id}</Text>
             </View>
         )
-
     }
 
     function ImagesDetails({navigation, route}){
@@ -72,7 +68,7 @@ export default function ImageScreen(){
             Animated.timing(
                 opacity,
                 {
-                    toValue: 1, 
+                    toValue: 0.8, 
                     duration: 500,
                     delay: 600,
                     useNativeDriver: true
@@ -87,9 +83,11 @@ export default function ImageScreen(){
                         <Card.Cover resizeMode="cover"style = {{width: 500, height: 700}}source={{uri: route.params.uri}}/>
                     </Card>
                 </SharedElement>
-                <View style = {{position: 'absolute', top: 50, left: 20}}>
-                    <Ionicons name="arrow-back" size={24} color="white" onPress={() => navigation.goBack()} style = {{opacity: opacity}}/>
-                    <Animated.Text style = {{...styles.textImage, opacity: opacity}}>EXEMPLO</Animated.Text>
+                <View style = {{position: 'absolute', top: 50, left: 20, width: '100%'}}>
+                    <Animated.View style = {{opacity: opacity}}>
+                        <Ionicons name="arrow-back" size={24} color="white" onPress={() => navigation.goBack()}/>
+                    </Animated.View>
+                    <Animated.Text style = {{...styles.textImage, opacity: opacity}}>A</Animated.Text>
                 </View>
             </View>
         )
@@ -102,7 +100,11 @@ export default function ImageScreen(){
             <Stack.Navigator initialRouteName="Images" screenOptions={{headerShown: false}}>
                 <Stack.Screen name="Images" component={ImagesView}/>
                 <Stack.Screen name = "ImagesDetails" component={ImagesDetails}
-                sharedElements = {({params}) => [params.id]}/>
+                sharedElements = {({params}) => [{
+                    id: params.id,
+                    animation: 'fade',
+                    resize: "auto",
+                    }]}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -121,10 +123,10 @@ const styles = StyleSheet.create({
     },
 
     textImage:{
-        fontSize: 50, 
+        fontSize: 40, 
         fontWeight: 'bold',
-        textShadowColor: 'green',
-        textShadowOffset: {width: 3, height: 2},
-        textShadowRadius: 5
+        textShadowColor: 'black',
+        textShadowOffset: {width: 3, height: 3},
+        textShadowRadius: 5,
     }
 })

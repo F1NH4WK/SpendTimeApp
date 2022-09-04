@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { BottomNavigation} from 'react-native-paper';
+import { createSharedElementStackNavigator, SharedElement } from 'react-navigation-shared-element';
+import { NavigationContainer } from '@react-navigation/native';
 
 // SCREENS
 import ImageScreen from './src/screens/imageScreen';
 import TextScreen from './src/screens/textScreen';
-
 
 
 export default function App() {
@@ -20,15 +21,16 @@ export default function App() {
     text: TextScreen
   })
 
+  
   return (
-    <BottomNavigation
-      navigationState={{index, routes}}
-      onIndexChange = {setIndex}  
-      renderScene = {renderScene}
-      shifting = {true}
-      sceneAnimationEnabled = {true}
-      sceneAnimationType = {'opacity'}
-      barStyle = {{height: '10%', backgroundColor: 'rgba(52, 52, 52, 0.2)'}}      
-        />
+      <BottomNavigation
+        navigationState={{index, routes}}
+        onIndexChange = {setIndex}  
+        renderScene = {renderScene}
+        shifting = {true}
+        sceneAnimationEnabled = {true}
+        sceneAnimationType = {'opacity'}
+        barStyle = {{height: '10%', backgroundColor: 'rgba(52, 52, 52, 0.2)'}}      
+          />
   );
 }

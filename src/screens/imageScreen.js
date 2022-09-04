@@ -1,5 +1,7 @@
-import { View, StyleSheet, FlatList, Pressable, Text } from "react-native";
-import { Card, Divider} from "react-native-paper";
+import { View, StyleSheet, FlatList, Text } from "react-native";
+import { createSharedElementStackNavigator, SharedElement } from "react-navigation-shared-element";
+import { NavigationContainer } from "@react-navigation/native";
+import { Card} from "react-native-paper";
 import { useState } from "react";
 
 export default function ImageScreen(){
@@ -37,10 +39,11 @@ export default function ImageScreen(){
                 <Card.Cover source={{uri: image}}/>
             </Card>
 
-    return(
-        <View style = {styles.viewContainer}>
+    function ImagesView({navigation}){
+        return(
+            <View style = {styles.viewContainer}>
             <FlatList
-            columnWrapperStyle = {{}}
+            
             numColumns = {2}
             data = {images}
             renderItem = {({item, index}) => renderImage(item.uri, index)}
@@ -52,8 +55,25 @@ export default function ImageScreen(){
                 }
             ])}
             />
-
         </View>
+        )
+    }
+
+    function ImagesDetails(){
+        return(
+            <View/>
+        )
+    }
+
+    const Stack = createSharedElementStackNavigator();
+
+    return(
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Images" screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Images" component={ImagesView}/>
+                <Stack.Screen name = "ImagesDetails" component={ImagesDetails}/>
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
 

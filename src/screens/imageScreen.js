@@ -63,6 +63,16 @@ export default function ImageScreen(){
     function ImagesDetails({navigation, route}){
 
         const opacity = useRef(new Animated.Value(0)).current;
+        const callAPI = (id) => {
+        fetch(`https://picsum.photos/id/${id}/info`)
+        .then((response) => response.json())
+        .then((json) => console.log(json.author))
+        // .then((json) => console.log(json.name))
+        .catch((e) => console.log(e))
+        }
+
+        callAPI(300);
+    
 
         useEffect(() => {
             Animated.timing(
@@ -80,7 +90,8 @@ export default function ImageScreen(){
             <View style = {styles.container}>
                 <SharedElement id = {route.params.id}>
                     <Card style = {{width: 500, height: 700}}>
-                        <Card.Cover resizeMode="cover"style = {{width: 500, height: 700}}source={{uri: route.params.uri}}/>
+                        <Card.Cover resizeMode="cover"style = {{width: 500, height: 700}}
+                        source={{uri: `https://picsum.photos/id/${route.params.imageId}/500/700`}}/>
                     </Card>
                 </SharedElement>
                 <View style = {{position: 'absolute', top: 50, left: 20, width: '100%'}}>

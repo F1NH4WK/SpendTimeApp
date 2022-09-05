@@ -1,11 +1,20 @@
-import { View, StyleSheet, FlatList, Text, Image, Animated, Pressable } from "react-native";
+import { View, StyleSheet, FlatList, Animated } from "react-native";
 import { createSharedElementStackNavigator, SharedElement } from "react-navigation-shared-element";
 import { NavigationContainer } from "@react-navigation/native";
-import { Card} from "react-native-paper";
-import { useEffect, useRef, useState } from "react";
+import { Card } from "react-native-paper";
+import { useEffect, useRef, useState} from "react";
 import { Ionicons } from '@expo/vector-icons'; 
+import { useFonts } from "expo-font";
 
 export default function ImageScreen(){
+
+    const [fontsLoaded] = useFonts({
+        'RobotoRegular': require('../fonts/RobotoRegular.ttf'),
+        'LatoRegular': require('../fonts/LatoRegular.ttf')
+    })
+    if (fontsLoaded){
+        console.log('A')
+    }
 
     const [images, setImages] = useState([
 
@@ -61,11 +70,9 @@ export default function ImageScreen(){
     }
 
     function ImagesDetails({navigation, route}){
-
+        
         const [author, setAuthor] = useState('')
-
         const opacity = useRef(new Animated.Value(0)).current;
-
 
         useEffect(() => {
             Animated.timing(
@@ -80,20 +87,19 @@ export default function ImageScreen(){
 
         fetch(`https://picsum.photos/id/${route.params.id}/info`)
         .then((response) => response.json())
-        .then((json) => {setAuthor(json.author)})
+        .then((json) => setAuthor(json.author))
         .catch((e) => console.log(e))
-        console.log(author)
         }, [])
 
         return(
             <View style = {styles.container}>
                 <SharedElement id = {route.params.id}>
                     <Card style = {{width: 500, height: 700}}>
-                        <Card.Cover resizeMode="cover"style = {{width: 500, height: 700}}
+                        <Card.Cover resizeMode="cover" style = {{width: 500, height: 700}}
                         source={{uri: `https://picsum.photos/id/${route.params.imageId}/500/700`}}/>
                     </Card>
                 </SharedElement>
-                <View style = {{position: 'absolute', top: 50, left: 20, width: '50%'}}>
+                <View style = {styles.viewGrouper}>
                     <Animated.View style = {{opacity: opacity}}>
                         <Ionicons name="arrow-back" size={24} color="white" onPress={() => navigation.goBack()}/>
                     </Animated.View>
@@ -134,9 +140,13 @@ const styles = StyleSheet.create({
 
     textImage:{
         fontSize: 40, 
-        fontWeight: 'bold',
-        textShadowColor: 'black',
-        textShadowOffset: {width: 3, height: 3},
-        textShadowRadius: 5,
+        fontWeight: '800',
+        fontFamily: 'RobotoRegular'
+    },
+    viewGrouper: {
+        position: 'absolute', 
+        top: 50, 
+        left: 20, 
+        width: '50%'
     }
 })

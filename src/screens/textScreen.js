@@ -7,11 +7,11 @@ import { useState, useEffect } from "react";
 export default function TextScreen(){
 
     const [data, setData] = useState([
+        {nome: 'Yoda', height: '2', gender: 'male', corPele: 'green'},
         {nome: 'Jesus', height: '24', gender: 'male', corPele: 'yellow'},
-        {nome: 'Jesus', height: '24', gender: 'male', corPele: 'yellow'},
-        {nome: 'Jesus', height: '24', gender: 'male', corPele: 'yellow'},
-        {nome: 'Jesus', height: '24', gender: 'male', corPele: 'yellow'},
-        {nome: 'Jesus', height: '24', gender: 'male', corPele: 'yellow'},
+        {nome: 'Darth Vader', height: '54', gender: 'male', corPele: 'black'},
+        {nome: 'Michael Jackson', height: '32', gender: 'male', corPele: 'pink'},
+        {nome: 'Julius', height: '70', gender: 'male', corPele: 'yellow'},
 
     ])
 

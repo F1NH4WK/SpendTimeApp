@@ -62,17 +62,10 @@ export default function ImageScreen(){
 
     function ImagesDetails({navigation, route}){
 
-        const opacity = useRef(new Animated.Value(0)).current;
-        const callAPI = (id) => {
-        fetch(`https://picsum.photos/id/${id}/info`)
-        .then((response) => response.json())
-        .then((json) => console.log(json.author))
-        // .then((json) => console.log(json.name))
-        .catch((e) => console.log(e))
-        }
+        const [author, setAuthor] = useState('')
 
-        callAPI(300);
-    
+        const opacity = useRef(new Animated.Value(0)).current;
+
 
         useEffect(() => {
             Animated.timing(
@@ -84,6 +77,12 @@ export default function ImageScreen(){
                     useNativeDriver: true
                 }
             ).start();
+
+        fetch(`https://picsum.photos/id/${route.params.id}/info`)
+        .then((response) => response.json())
+        .then((json) => {setAuthor(json.author)})
+        .catch((e) => console.log(e))
+        console.log(author)
         }, [])
 
         return(
@@ -94,11 +93,11 @@ export default function ImageScreen(){
                         source={{uri: `https://picsum.photos/id/${route.params.imageId}/500/700`}}/>
                     </Card>
                 </SharedElement>
-                <View style = {{position: 'absolute', top: 50, left: 20, width: '100%'}}>
+                <View style = {{position: 'absolute', top: 50, left: 20, width: '50%'}}>
                     <Animated.View style = {{opacity: opacity}}>
                         <Ionicons name="arrow-back" size={24} color="white" onPress={() => navigation.goBack()}/>
                     </Animated.View>
-                    <Animated.Text style = {{...styles.textImage, opacity: opacity}}>A</Animated.Text>
+                    <Animated.Text style = {{...styles.textImage, opacity: opacity}}>{author}</Animated.Text>
                 </View>
             </View>
         )
